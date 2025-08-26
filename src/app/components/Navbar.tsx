@@ -31,7 +31,7 @@ const Header = () => {
           </Link>
           <span className="block">phone: +966920002814</span>
         </div>
-        {/* <LanguageSwitcher/> */}
+        
 </div>
 
 
