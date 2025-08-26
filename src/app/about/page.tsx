@@ -59,8 +59,8 @@ export default function AboutPage() {
           Founded in 2019 with the vision of simplifying the sacred journey, we
           started as a small team assisting local communities. Today, Alhamdulillah,
           we proudly serve thousands of pilgrims across the globe with tailored
-          Hajj and Umrah experiences. Our growth is a reflection of trust,
-          dedication, and the blessings of Allah.
+          Hajj and Umrah experiences. Our growth is a reflection of trust, dedication,
+          and the blessings of Allah.
         </p>
       </section>
 
@@ -96,7 +96,7 @@ export default function AboutPage() {
             Our Vision
           </h2>
           <p className="text-gray-200 mt-4 leading-relaxed">
-            To be the world's leading platform for Hajj and Umrah services,
+            To be the world&apos;s leading platform for Hajj and Umrah services,
             connecting millions of pilgrims with their spiritual aspirations
             through innovative technology and exceptional service.
           </p>
@@ -121,7 +121,7 @@ export default function AboutPage() {
             },
             {
               title: "Comprehensive Packages",
-              desc: "All-in-one services designed to suit every pilgrim’s needs.",
+              desc: "All-in-one services designed to suit every pilgrim&apos;s needs.",
             },
             {
               title: "24/7 Support",

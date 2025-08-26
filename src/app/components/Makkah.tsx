@@ -9,20 +9,48 @@ const inter = Inter({ subsets: ["latin"] });
 
 const fadeInUp = { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } };
 
+// Types
+interface Hotel {
+  id: number;
+  name: string;
+  rating: number;
+  price: number;
+  desc: string;
+  details?: string;
+}
+
+interface ItineraryStep {
+  step: string;
+  detail: string;
+}
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
 const MakkahPage: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-
-  const [hotels, setHotels] = useState<any[]>([]);
-  const [itinerary, setItinerary] = useState<any[]>([]);
-  const [faqData, setFaqData] = useState<any[]>([]);
   const [activeHotel, setActiveHotel] = useState<number | null>(null);
 
-  // fetch backend data
+  const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [itinerary, setItinerary] = useState<ItineraryStep[]>([]);
+  const [faqData, setFaqData] = useState<FaqItem[]>([]);
+
+  // Fetch backend data
   useEffect(() => {
-    fetch("/api/hotels").then(res => res.json()).then(setHotels);
-    fetch("/api/itinerary").then(res => res.json()).then(setItinerary);
-    fetch("/api/faq").then(res => res.json()).then(setFaqData);
+    fetch("/api/hotels")
+      .then(res => res.json())
+      .then((data: Hotel[]) => setHotels(data));
+
+    fetch("/api/itinerary")
+      .then(res => res.json())
+      .then((data: ItineraryStep[]) => setItinerary(data));
+
+    fetch("/api/faq")
+      .then(res => res.json())
+      .then((data: FaqItem[]) => setFaqData(data));
   }, []);
 
   return (

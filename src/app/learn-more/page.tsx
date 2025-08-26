@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,20 +10,12 @@ import { Star, ShieldCheck, Clock, Users } from "lucide-react";
 /* ------------------- Variants ------------------- */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] },
-  },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
 const cardFade: Variants = {
   hidden: { opacity: 0, y: 20 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
-  },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
 const drawerVariants: Variants = {
@@ -31,14 +23,25 @@ const drawerVariants: Variants = {
   show: { x: 0, transition: { type: "tween", duration: 0.32 } },
 };
 
-export default function HajjLandingPage() {
-  const [packages, setPackages] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+/* ------------------- Types ------------------- */
+interface Package {
+  id: number;
+  title: string;
+  price: string;
+  duration: string;
+}
 
+interface Message {
+  type: "success" | "error";
+  text: string;
+}
+
+export default function LearnMorePage() {
+  const [packages, setPackages] = useState<Package[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedPkgId, setSelectedPkgId] = useState<number | null>(null);
 
-  // Form fields
+  // Form Fields
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -49,54 +52,42 @@ export default function HajjLandingPage() {
   const [specialRequest, setSpecialRequest] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [message, setMessage] = useState<Message | null>(null);
 
-  const defaultPackages = [
+  // ✅ Default Packages (memoized)
+  const defaultPackages = useMemo<Package[]>(() => [
     { id: 1, title: "Luxury Package", price: "$5000", duration: "15 Days" },
     { id: 2, title: "Economy Package", price: "$2500", duration: "10 Days" },
     { id: 3, title: "Family Package", price: "$8000", duration: "20 Days" },
     { id: 4, title: "Group Package", price: "$2000", duration: "12 Days" },
-  ];
+  ], []);
 
   /* ------------------- Fetch Packages ------------------- */
   useEffect(() => {
     let mounted = true;
     fetch("/api/packages")
-      .then((res) => {
-        if (!res.ok) throw new Error("no api");
-        return res.json();
-      })
-      .then((data) => {
+      .then(res => res.ok ? res.json() : Promise.reject("No API"))
+      .then((data: Package[]) => {
         if (!mounted) return;
         setPackages(Array.isArray(data) && data.length ? data : defaultPackages);
       })
       .catch(() => {
         if (!mounted) return;
         setPackages(defaultPackages);
-      })
-      .finally(() => {
-        if (!mounted) return;
-        setLoading(false);
       });
+    return () => { mounted = false; };
+  }, [defaultPackages]);
 
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
+  /* ------------------- Drawer ------------------- */
   const openBookingDrawer = (pkgId?: number) => {
     if (pkgId) setSelectedPkgId(pkgId);
     setMessage(null);
     setDrawerOpen(true);
   };
-
-  const closeDrawer = () => {
-    setDrawerOpen(false);
-    setSubmitting(false);
-  };
+  const closeDrawer = () => { setDrawerOpen(false); setSubmitting(false); };
 
   /* ------------------- Handle Booking ------------------- */
-  const handleSubmitBooking = async (e: React.FormEvent) => {
+  const handleSubmitBooking = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setMessage(null);
 
@@ -124,19 +115,9 @@ export default function HajjLandingPage() {
       });
 
       const data = await res.json();
-
       if (res.ok) {
         setMessage({ type: "success", text: data.message || "Booking saved successfully!" });
-        // reset form
-        setName("");
-        setEmail("");
-        setPhone("");
-        setPassport("");
-        setTravelers(1);
-        setTravelDate("");
-        setDepartureCity("");
-        setSpecialRequest("");
-        setSelectedPkgId(null);
+        setName(""); setEmail(""); setPhone(""); setPassport(""); setTravelers(1); setTravelDate(""); setDepartureCity(""); setSpecialRequest(""); setSelectedPkgId(null);
       } else {
         setMessage({ type: "error", text: data?.message || "Booking failed. Try again." });
       }
@@ -146,8 +127,6 @@ export default function HajjLandingPage() {
       setSubmitting(false);
     }
   };
-
-  const selectedPkg = packages.find((p) => p.id === selectedPkgId);
 
   return (
     <main className="font-sans text-gray-900">
@@ -274,9 +253,6 @@ export default function HajjLandingPage() {
           </>
         )}
       </AnimatePresence>
-    
     </main>
-   
-    
   );
 }

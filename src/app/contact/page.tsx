@@ -11,9 +11,14 @@ const merienda = Merienda({
   weight: ["400", "700"],
 });
 
+interface Status {
+  ok?: boolean;
+  msg?: string;
+}
+
 export default function ContactPage() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<{ ok?: boolean; msg?: string }>({});
+  const [status, setStatus] = useState<Status>({});
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,11 +50,12 @@ export default function ContactPage() {
 
       if (res.ok) {
         setStatus({ ok: true, msg: "✅ Thank you! We’ll contact you soon InshAllah." });
-        formRef.current.reset(); // ✅ safe reset
+        formRef.current.reset();
       } else {
-        setStatus({ ok: false, msg: "❌ Something went wrong. Please try again." });
+        const errorResponse = await res.json();
+        setStatus({ ok: false, msg: errorResponse?.error || "❌ Something went wrong. Please try again." });
       }
-    } catch (err) {
+    } catch {
       setStatus({ ok: false, msg: "❌ Failed to send. Try again later." });
     } finally {
       setLoading(false);
@@ -87,45 +93,11 @@ export default function ContactPage() {
           transition={{ duration: 0.4 }}
           className="space-y-5 bg-white/10 backdrop-blur-lg p-6 md:p-8 rounded-2xl border border-yellow-400/20 shadow-xl"
         >
-          <input
-            type="text"
-            name="name"
-            required
-            placeholder="Full Name"
-            className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="Email"
-            className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-
-          <input
-            type="text"
-            name="phone"
-            required
-            placeholder="Phone Number"
-            className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-
-          <input
-            type="text"
-            name="city"
-            required
-            placeholder="City / Country"
-            className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
-
-          <textarea
-            name="message"
-            rows={4}
-            required
-            placeholder="Your Message..."
-            className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-          />
+          <input type="text" name="name" required placeholder="Full Name" className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+          <input type="email" name="email" required placeholder="Email" className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+          <input type="text" name="phone" required placeholder="Phone Number" className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+          <input type="text" name="city" required placeholder="City / Country" className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
+          <textarea name="message" rows={4} required placeholder="Your Message..." className="w-full p-3 rounded-xl bg-black/40 text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-400" />
 
           <motion.button
             whileTap={{ scale: 0.98 }}
@@ -157,45 +129,31 @@ export default function ContactPage() {
         <div className="mt-16 grid md:grid-cols-3 gap-8 text-center">
           <div>
             <Phone className="mx-auto mb-3 text-yellow-400" size={28} />
-            <h2 className={`${merienda.className} text-xl font-bold text-yellow-400 mb-2`}>
-              Phone
-            </h2>
+            <h2 className={`${merienda.className} text-xl font-bold text-yellow-400 mb-2`}>Phone</h2>
             <p className="text-gray-300">+92 300 1234567</p>
           </div>
           <div>
             <Mail className="mx-auto mb-3 text-yellow-400" size={28} />
-            <h2 className={`${merienda.className} text-xl font-bold text-yellow-400 mb-2`}>
-              Email
-            </h2>
+            <h2 className={`${merienda.className} text-xl font-bold text-yellow-400 mb-2`}>Email</h2>
             <p className="text-gray-300">info@yourdomain.com</p>
           </div>
           <div>
             <MapPin className="mx-auto mb-3 text-yellow-400" size={28} />
-            <h2 className={`${merienda.className} text-xl font-bold text-yellow-400 mb-2`}>
-              Office
-            </h2>
+            <h2 className={`${merienda.className} text-xl font-bold text-yellow-400 mb-2`}>Office</h2>
             <p className="text-gray-300">Lahore, Pakistan</p>
           </div>
         </div>
 
         {/* WhatsApp CTA */}
         <div className="mt-12 text-center">
-          <a
-            href="https://wa.me/923001234567"
-            target="_blank"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-600 transition text-white font-semibold shadow-lg"
-          >
+          <a href="https://wa.me/923001234567" target="_blank" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-green-500 hover:bg-green-600 transition text-white font-semibold shadow-lg">
             <MessageCircle size={20} /> Chat on WhatsApp
           </a>
         </div>
 
-
         {/* Back Button */}
         <div className="text-center mt-10">
-          <Link
-            href="/"
-            className="text-sm text-gray-300 hover:text-white underline underline-offset-4"
-          >
+          <Link href="/" className="text-sm text-gray-300 hover:text-white underline underline-offset-4">
             ← Back to Home
           </Link>
         </div>

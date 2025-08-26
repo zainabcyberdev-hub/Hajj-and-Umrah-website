@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image"; // ✅ Image import kiya
 import { Card } from "../../components/ui/card";
 import {
   FileText,
@@ -128,11 +129,13 @@ export default function Services() {
                   hover:-translate-y-3 transition-all duration-500 group"
                 >
                   {/* Image */}
-                  <div className="h-48 sm:h-52 md:h-56 lg:h-60 w-full overflow-hidden">
-                    <img
+                  <div className="h-48 sm:h-52 md:h-56 lg:h-60 w-full relative overflow-hidden">
+                    <Image
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      priority
                     />
                   </div>
 

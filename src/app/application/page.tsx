@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import { Merienda } from "next/font/google";
 import { Shield, Star, Globe2, CheckCircle2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Button } from "../../components/ui/button";
+import Image from "next/image";
 
 const merienda = Merienda({
   subsets: ["latin"],
@@ -16,10 +17,8 @@ type Message = { type: "success" | "error"; text: string };
 
 export default function HajjLandingPage() {
   const [packages, setPackages] = useState<Package[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedPkgId, setSelectedPkgId] = useState<number | null>(null);
 
-  // Form state in one object
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -34,14 +33,17 @@ export default function HajjLandingPage() {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<Message | null>(null);
 
-  const defaultPackages: Package[] = [
-    { id: 1, title: "Luxury Package", price: "$5000", duration: "15 Days" },
-    { id: 2, title: "Economy Package", price: "$2500", duration: "10 Days" },
-    { id: 3, title: "Family Package", price: "$8000", duration: "20 Days" },
-    { id: 4, title: "Group Package", price: "$2000", duration: "12 Days" },
-  ];
+  // useMemo for defaultPackages to avoid useEffect dependency warning
+  const defaultPackages = useMemo<Package[]>(
+    () => [
+      { id: 1, title: "Luxury Package", price: "$5000", duration: "15 Days" },
+      { id: 2, title: "Economy Package", price: "$2500", duration: "10 Days" },
+      { id: 3, title: "Family Package", price: "$8000", duration: "20 Days" },
+      { id: 4, title: "Group Package", price: "$2000", duration: "12 Days" },
+    ],
+    []
+  );
 
-  // Fetch packages
   useEffect(() => {
     let mounted = true;
     fetch("/api/packages")
@@ -53,19 +55,16 @@ export default function HajjLandingPage() {
       .catch(() => {
         if (!mounted) return;
         setPackages(defaultPackages);
-      })
-      .finally(() => {
-        if (!mounted) return;
-        setLoading(false);
       });
 
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [defaultPackages]);
 
-  // Handle form change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
@@ -94,7 +93,6 @@ export default function HajjLandingPage() {
 
       if (res.ok) {
         setMessage({ type: "success", text: data.message || "Booking saved successfully!" });
-        // reset form
         setForm({
           name: "",
           email: "",
@@ -118,13 +116,25 @@ export default function HajjLandingPage() {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-sky-950 via-slate-900 to-slate-800 text-white">
-      <div className="absolute inset-0">
-        <img src="/servicesBack.png" alt="Background" className="w-full h-full object-cover opacity-20" />
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/servicesBack.png"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+          priority
+        />
       </div>
 
       <div className="relative container mx-auto px-4 py-20">
-        {/* Hero */}
-        <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center max-w-4xl mx-auto mb-16">
+        {/* Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-4xl mx-auto mb-16"
+        >
           <h1 className={`${merienda.className} text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight`}>
             Begin Your{" "}
             <span className="bg-gradient-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
@@ -137,7 +147,12 @@ export default function HajjLandingPage() {
         </motion.div>
 
         {/* Booking Form */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-xl mx-auto bg-black/70 p-6 rounded-md mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-xl mx-auto bg-black/70 p-6 rounded-md mb-16"
+        >
           <form onSubmit={handleSubmitBooking} className="space-y-4">
             <select
               name="packageId"

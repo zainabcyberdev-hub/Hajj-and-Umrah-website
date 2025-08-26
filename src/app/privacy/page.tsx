@@ -47,7 +47,7 @@ export default function PrivacyPolicySection() {
           <PolicyCard title="Introduction">
             <p>
               This Privacy Policy describes how <strong>Your Company Name</strong>
-              ("we", "us", or "our") collects, uses, and shares information when you visit or use our website, mobile application, and related services (collectively, the "Services"). By using our Services, you agree to the collection and use of information in accordance with this policy.
+              (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses, and shares information when you visit or use our website, mobile application, and related services (collectively, the &quot;Services&quot;). By using our Services, you agree to the collection and use of information in accordance with this policy.
             </p>
           </PolicyCard>
 
@@ -61,7 +61,7 @@ export default function PrivacyPolicySection() {
                 <strong>Usage Data:</strong> IP address, device and browser type, pages viewed, time spent, and referring pages.
               </li>
               <li>
-                <strong>Cookies & Similar Technologies:</strong> used for authentication, preferences, analytics, and marketing. You can control cookies through your browser settings.
+                <strong>Cookies &amp; Similar Technologies:</strong> used for authentication, preferences, analytics, and marketing. You can control cookies through your browser settings.
               </li>
             </ul>
           </PolicyCard>
@@ -88,9 +88,7 @@ export default function PrivacyPolicySection() {
 
           {/* Sharing */}
           <PolicyCard title="Sharing of Information">
-            <p>
-              We do not sell your personal information. We may share data with:
-            </p>
+            <p>We do not sell your personal information. We may share data with:</p>
             <ul className="list-disc list-inside space-y-1 text-gray-200">
               <li>Service providers (e.g., airlines, hotels, transport, visa processing) strictly as needed to deliver your bookings.</li>
               <li>Payment processors (e.g., Stripe) for secure transactions. We do not store full card details.</li>
@@ -124,23 +122,24 @@ export default function PrivacyPolicySection() {
           </PolicyCard>
 
           {/* Cookies */}
-          <PolicyCard title="Cookies & Analytics">
+          <PolicyCard title="Cookies &amp; Analytics">
             <p>
-              We use cookies to keep you signed in, remember preferences, and analyze traffic. You can manage cookies via browser settings. For analytics, we may use tools such as Google Analytics. Learn more about Google’s practices at
-              {" "}
-              <Link href="https://policies.google.com/privacy" target="_blank" className="underline text-amber-300">Google Privacy & Terms</Link>.
+              We use cookies to keep you signed in, remember preferences, and analyze traffic. You can manage cookies via browser settings. For analytics, we may use tools such as Google Analytics. Learn more about Google’s practices at{" "}
+              <Link href="https://policies.google.com/privacy" target="_blank" className="underline text-amber-300">
+                Google Privacy &amp; Terms
+              </Link>.
             </p>
           </PolicyCard>
 
-          {/* Advertising (Optional) */}
-          <PolicyCard title="Advertising & Remarketing (Optional)">
+          {/* Advertising */}
+          <PolicyCard title="Advertising &amp; Remarketing (Optional)">
             <p>
               We may work with advertising partners to show relevant ads. Partners may set cookies or use similar technologies to measure ad performance. You can opt out via your browser or device settings.
             </p>
           </PolicyCard>
 
           {/* Children */}
-          <PolicyCard title="Children’s Privacy">
+          <PolicyCard title="Children&apos;s Privacy">
             <p>
               Our Services are not directed to children under 13 (or the age defined by local law). We do not knowingly collect data from children. If you believe a child has provided us data, contact us to delete it.
             </p>
@@ -169,9 +168,7 @@ export default function PrivacyPolicySection() {
 
           {/* Contact */}
           <PolicyCard title="Contact Us">
-            <p>
-              If you have any questions or requests concerning this Privacy Policy, contact us at:
-            </p>
+            <p>If you have any questions or requests concerning this Privacy Policy, contact us at:</p>
             <ul className="text-gray-200">
               <li><strong>Email:</strong> privacy@yourdomain.com</li>
               <li><strong>Phone:</strong> +92 300 1234567</li>
@@ -196,9 +193,7 @@ function PolicyCard({ title, children }: { title: string; children: React.ReactN
       viewport={{ once: true, margin: "-50px" }}
       className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl p-6 md:p-8 shadow-2xl hover:border-amber-400/40 hover:shadow-amber-400/20 transition-all"
     >
-      {/* soft gradient sheen */}
       <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity bg-gradient-to-br from-yellow-500/30 via-amber-300/20 to-transparent" />
-
       <h2 className={`${merienda.className} text-2xl font-bold mb-4 text-amber-400`}>{title}</h2>
       <div className="leading-relaxed text-gray-100/90">{children}</div>
     </motion.article>

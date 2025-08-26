@@ -7,6 +7,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const merienda = Merienda({
   subsets: ["latin"],
@@ -19,7 +20,6 @@ const Hero = () => {
     slides: { perView: 1 },
   });
 
-  // Auto slide
   useEffect(() => {
     const interval = setInterval(() => {
       instanceRef.current?.next();
@@ -30,10 +30,9 @@ const Hero = () => {
   return (
     <section
       className={`${merienda.className} relative min-h-[75vh] lg:min-h-[80vh] 
-  bg-gradient-to-br from-sky-900 via-slate-900 to-slate-800 
-  overflow-hidden flex items-center`}
+      bg-gradient-to-br from-sky-900 via-slate-900 to-slate-800 
+      overflow-hidden flex items-center`}
     >
-
       {/* Background Accent */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
         <div className="absolute top-20 left-10 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-amber-400/40 rounded-full blur-3xl"></div>
@@ -71,46 +70,43 @@ const Hero = () => {
               </p>
             </div>
 
-
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link href="/journey">
-        <Button
-          size="lg"
-          className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white 
-          shadow-lg hover:opacity-90 group 
-          w-full sm:w-auto sm:px-6 md:px-8 transition-all duration-300"
-        >
-          Start Your Journey
-          <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-        </Button>
-      </Link>
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white 
+                  shadow-lg hover:opacity-90 group 
+                  w-full sm:w-auto sm:px-6 md:px-8 transition-all duration-300"
+                >
+                  Start Your Journey
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
 
-      {/* Outline Button */}
-      <Link href="/learn-more">
-        <Button
-          size="lg"
-          variant="outline"
-          className="
-          border border-white 
-          text-white 
-          font-semibold 
-          px-6 py-2 
-          rounded-full 
-          transition-all 
-          duration-300 
-          hover:text-black 
-          hover:bg-white 
-          hover:shadow-lg 
-          hover:scale-105
-          active:scale-95
-          w-full sm:w-auto
-        "
-        >
-          Learn More
-        </Button>
-      </Link>
-
+              <Link href="/learn-more">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="
+                  border border-white 
+                  text-white 
+                  font-semibold 
+                  px-6 py-2 
+                  rounded-full 
+                  transition-all 
+                  duration-300 
+                  hover:text-black 
+                  hover:bg-white 
+                  hover:shadow-lg 
+                  hover:scale-105
+                  active:scale-95
+                  w-full sm:w-auto
+                "
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
 
             {/* Stats */}
@@ -164,32 +160,40 @@ const Hero = () => {
               ref={sliderRef}
               className="keen-slider rounded-2xl overflow-hidden shadow-xl w-full max-w-md sm:max-w-lg lg:max-w-full"
             >
-              <div className="keen-slider__slide">
-                <img
+              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
+                <Image
                   src="/background1.jpg"
                   alt="Hajj Image 1"
-                  className="w-full h-56 sm:h-72 md:h-80 lg:h-[350px] object-cover"
+                  fill
+                  className="object-cover rounded-2xl"
+                  priority
                 />
               </div>
-              <div className="keen-slider__slide">
-                <img
+              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
+                <Image
                   src="/background.svg"
                   alt="Hajj Image 2"
-                  className="w-full h-56 sm:h-72 md:h-80 lg:h-[350px] object-cover"
+                  fill
+                  className="object-cover rounded-2xl"
+                  priority
                 />
               </div>
-              <div className="keen-slider__slide">
-                <img
+              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
+                <Image
                   src="/background2.jpg"
                   alt="Hajj Image 3"
-                  className="w-full h-56 sm:h-72 md:h-80 lg:h-[350px] object-cover"
+                  fill
+                  className="object-cover rounded-2xl"
+                  priority
                 />
               </div>
-              <div className="keen-slider__slide">
-                <img
+              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
+                <Image
                   src="/background3.jpg"
                   alt="Hajj Image 4"
-                  className="w-full h-56 sm:h-72 md:h-80 lg:h-[350px] object-cover"
+                  fill
+                  className="object-cover rounded-2xl"
+                  priority
                 />
               </div>
             </div>
