@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 "src/credentials.json" 
 "credentials.json" 
+"src/credentials.json" 
+"src/credentials.json" 

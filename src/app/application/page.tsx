@@ -11,30 +11,37 @@ const merienda = Merienda({
   weight: ["400", "700"],
 });
 
+type Package = { id: number; title: string; price: string; duration: string };
+type Message = { type: "success" | "error"; text: string };
+
 export default function HajjLandingPage() {
-  const [packages, setPackages] = useState<any[]>([]);
+  const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPkgId, setSelectedPkgId] = useState<number | null>(null);
 
-  // Form fields
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [passport, setPassport] = useState("");
-  const [travelers, setTravelers] = useState(1);
-  const [travelDate, setTravelDate] = useState("");
-  const [departureCity, setDepartureCity] = useState("");
-  const [specialRequest, setSpecialRequest] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  // Form state in one object
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    passport: "",
+    travelers: 1,
+    travelDate: "",
+    departureCity: "",
+    specialRequest: "",
+  });
 
-  const defaultPackages = [
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState<Message | null>(null);
+
+  const defaultPackages: Package[] = [
     { id: 1, title: "Luxury Package", price: "$5000", duration: "15 Days" },
     { id: 2, title: "Economy Package", price: "$2500", duration: "10 Days" },
     { id: 3, title: "Family Package", price: "$8000", duration: "20 Days" },
     { id: 4, title: "Group Package", price: "$2000", duration: "12 Days" },
   ];
 
+  // Fetch packages
   useEffect(() => {
     let mounted = true;
     fetch("/api/packages")
@@ -57,11 +64,20 @@ export default function HajjLandingPage() {
     };
   }, []);
 
+  // Handle form change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: name === "travelers" ? Number(value) : value,
+    }));
+  };
+
   const handleSubmitBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage(null);
 
-    if (!name || !email || !phone || !passport || !selectedPkgId) {
+    if (!form.name || !form.email || !form.phone || !form.passport || !selectedPkgId) {
       setMessage({ type: "error", text: "Please fill all required fields." });
       return;
     }
@@ -71,31 +87,24 @@ export default function HajjLandingPage() {
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          passport,
-          travelers,
-          travelDate,
-          departureCity,
-          specialRequest,
-          packageId: selectedPkgId,
-        }),
+        body: JSON.stringify({ ...form, packageId: selectedPkgId }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
         setMessage({ type: "success", text: data.message || "Booking saved successfully!" });
-        setName("");
-        setEmail("");
-        setPhone("");
-        setPassport("");
-        setTravelers(1);
-        setTravelDate("");
-        setDepartureCity("");
-        setSpecialRequest("");
+        // reset form
+        setForm({
+          name: "",
+          email: "",
+          phone: "",
+          passport: "",
+          travelers: 1,
+          travelDate: "",
+          departureCity: "",
+          specialRequest: "",
+        });
         setSelectedPkgId(null);
       } else {
         setMessage({ type: "error", text: data?.message || "Booking failed. Try again." });
@@ -131,6 +140,7 @@ export default function HajjLandingPage() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-xl mx-auto bg-black/70 p-6 rounded-md mb-16">
           <form onSubmit={handleSubmitBooking} className="space-y-4">
             <select
+              name="packageId"
               value={selectedPkgId ?? ""}
               onChange={(e) => setSelectedPkgId(Number(e.target.value))}
               className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2 text-white"
@@ -143,19 +153,19 @@ export default function HajjLandingPage() {
               ))}
             </select>
 
-            <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full Name" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
-            <input value={passport} onChange={(e) => setPassport(e.target.value)} placeholder="Passport Number" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
-            <input type="number" min="1" value={travelers} onChange={(e) => setTravelers(Number(e.target.value))} placeholder="Number of Travelers" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
-            <input type="date" value={travelDate} onChange={(e) => setTravelDate(e.target.value)} className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2 text-gray-400" />
-            <input value={departureCity} onChange={(e) => setDepartureCity(e.target.value)} placeholder="Departure City" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
-            <textarea value={specialRequest} onChange={(e) => setSpecialRequest(e.target.value)} placeholder="Special Requests (optional)" rows={3} className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <input name="name" value={form.name} onChange={handleChange} placeholder="Full Name" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="Email" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <input name="phone" value={form.phone} onChange={handleChange} placeholder="Phone" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <input name="passport" value={form.passport} onChange={handleChange} placeholder="Passport Number" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <input type="number" min="1" name="travelers" value={form.travelers} onChange={handleChange} placeholder="Number of Travelers" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <input type="date" name="travelDate" value={form.travelDate} onChange={handleChange} className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2 text-gray-400" />
+            <input name="departureCity" value={form.departureCity} onChange={handleChange} placeholder="Departure City" className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
+            <textarea name="specialRequest" value={form.specialRequest} onChange={handleChange} placeholder="Special Requests (optional)" rows={3} className="w-full bg-black/80 border border-yellow-400/30 rounded-md p-2" />
 
             {message && (
-              <div className={`p-3 rounded-md ${message.type === "success" ? "bg-green-800" : "bg-red-800"}`}>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={`p-3 rounded-md text-sm ${message.type === "success" ? "bg-green-800" : "bg-red-800"}`}>
                 {message.text}
-              </div>
+              </motion.div>
             )}
 
             <Button type="submit" disabled={submitting} className="w-full bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full">
@@ -166,39 +176,24 @@ export default function HajjLandingPage() {
 
         {/* Info Section */}
         <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="space-y-8">
-          <div className="flex items-start gap-4">
-            <Shield className="h-10 w-10 text-amber-400" />
-            <div>
-              <h3 className="text-xl font-semibold">Secure & Verified</h3>
-              <p className="text-white/70">Your data is fully encrypted and processed through official channels.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <Star className="h-10 w-10 text-amber-400" />
-            <div>
-              <h3 className="text-xl font-semibold">Luxury Experience</h3>
-              <p className="text-white/70">Premium support and hassle-free application process designed for you.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <Globe2 className="h-10 w-10 text-amber-400" />
-            <div>
-              <h3 className="text-xl font-semibold">Worldwide Access</h3>
-              <p className="text-white/70">Applications accepted from over 50+ countries across the globe.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <CheckCircle2 className="h-10 w-10 text-amber-400" />
-            <div>
-              <h3 className="text-xl font-semibold">Fast Processing</h3>
-              <p className="text-white/70">Receive confirmation updates and visa status instantly.</p>
-            </div>
-          </div>
+          <InfoItem icon={<Shield className="h-10 w-10 text-amber-400" />} title="Secure & Verified" text="Your data is fully encrypted and processed through official channels." />
+          <InfoItem icon={<Star className="h-10 w-10 text-amber-400" />} title="Luxury Experience" text="Premium support and hassle-free application process designed for you." />
+          <InfoItem icon={<Globe2 className="h-10 w-10 text-amber-400" />} title="Worldwide Access" text="Applications accepted from over 50+ countries across the globe." />
+          <InfoItem icon={<CheckCircle2 className="h-10 w-10 text-amber-400" />} title="Fast Processing" text="Receive confirmation updates and visa status instantly." />
         </motion.div>
       </div>
     </section>
+  );
+}
+
+function InfoItem({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
+  return (
+    <div className="flex items-start gap-4">
+      {icon}
+      <div>
+        <h3 className="text-xl font-semibold">{title}</h3>
+        <p className="text-white/70">{text}</p>
+      </div>
+    </div>
   );
 }
