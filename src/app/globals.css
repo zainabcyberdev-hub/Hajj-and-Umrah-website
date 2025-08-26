@@ -1,0 +1,119 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import "keen-slider/keen-slider.min.css";
+@import "tw-animate-css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@custom-variant dark (&:is(.dark *)); /* if using tw-variants plugin */
+
+/* Base styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  cursor: url('/cursor.png'), auto;
+}
+
+/* Custom static colors */
+.bg-primary { 
+  background-color: #0072C6 !important; 
+}
+.text-primary { 
+  color: #011049 !important; 
+}
+
+/* Theme variables */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --border: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+    /* ... keep your other tokens ... */
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    /* ... keep your other tokens ... */
+  }
+
+  /* ✅ Don't use @apply border-border directly */
+  * {
+    border-color: hsl(var(--border)); /* instead of @apply border-border */
+    outline-color: hsl(var(--ring) / 0.5); /* instead of @apply outline-ring/50 */
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  font-size: 14px !important;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+/* Hide Google branding */
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+/* Hide bottom banner that appears */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+/* Google translate ka top navbar (popup) hide karna */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+/* Page ke top me jo khali jagah banti hai usko remove karna */
+body {
+  top: 0px !important;
+}
+
+/* Select box ko thoda normal aur clean dikhane ke liye */
+.goog-te-combo {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: white;
+  color: #333;
+}
+/* ✅ Google Translate popup/toolbar ko forcefully hide karne ke liye */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+.goog-logo-link,
+.goog-te-balloon-frame,
+.goog-tooltip {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* ✅ Page ke top pe jo empty space aa jata hai usko remove karne ke liye */
+body {
+  top: 0px !important;
+}
