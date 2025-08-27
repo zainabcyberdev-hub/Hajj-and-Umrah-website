@@ -58,7 +58,7 @@ const maqamat = [
   {
     title: "Masjid E Quba & Masjid Ayesha",
     description: "Historic mosques where pilgrims often wear Ihram for Umrah.",
-    image: "/quba.png",
+    image: "/qubanaisha.png",
   },
   {
     title: "Jannat-ul-Mualla",
@@ -89,7 +89,7 @@ const maqamat = [
 export default function MaqamatPage() {
   return (
     <div className="relative min-h-screen text-white">
-      {/* Fixed Background */}
+      {/* Background */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/servicesBack.png"
@@ -98,11 +98,11 @@ export default function MaqamatPage() {
           priority
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/75 to-black/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/95" />
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 text-center py-20 md:py-32 px-6">
+      <section className="relative z-10 text-center py-16 md:py-24 px-6">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,7 +117,7 @@ export default function MaqamatPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="mt-6 max-w-3xl mx-auto text-base md:text-xl text-gray-200 leading-relaxed"
+          className="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-200 leading-relaxed"
         >
           Explore the blessed landmarks and sacred sites visited by millions of
           pilgrims, each carrying immense historical and spiritual significance.
@@ -125,42 +125,43 @@ export default function MaqamatPage() {
       </section>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-20 space-y-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 md:py-16 space-y-14">
         {maqamat.map((maqam, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: i * 0.1 }}
+            transition={{ duration: 0.6, delay: i * 0.05 }}
             className={`flex flex-col ${
               i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-            } items-center gap-8 md:gap-14 group`}
+            } items-center gap-6 md:gap-10 group`}
           >
             {/* Image */}
-            <div className="w-full md:w-1/2 overflow-hidden rounded-2xl shadow-xl">
-              <Image
-                src={maqam.image}
-                alt={maqam.title}
-                width={650}
-                height={450}
-                className="rounded-2xl object-cover transform transition duration-500 group-hover:scale-105"
-              />
+            <div className="w-full md:w-1/2 overflow-hidden rounded-xl shadow-lg">
+              <div className="relative w-full h-[320px]"> {/* Fixed height */}
+                <Image
+                  src={maqam.image}
+                  alt={maqam.title}
+                  fill
+                  className="rounded-xl object-cover transition duration-500 group-hover:scale-105"
+                />
+              </div>
             </div>
 
-            {/* Content Card */}
+            {/* Content */}
             <div
-              className="w-full md:w-1/2 p-8 rounded-2xl 
-              bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg 
-              border border-yellow-400/30 shadow-lg 
-              transition duration-500 group-hover:shadow-yellow-300/40 group-hover:scale-[1.02]"
+              className="w-full md:w-1/2 p-6 md:p-7 rounded-xl 
+              bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md 
+              border border-yellow-400/30 shadow-md 
+              transition duration-500 group-hover:shadow-yellow-300/40 group-hover:scale-[1.01]"
             >
               <h2
-                className={`${merienda.className} text-2xl md:text-3xl font-bold text-yellow-300`}
+                className={`${merienda.className} text-xl md:text-2xl font-semibold text-yellow-300`}
               >
                 {maqam.title}
               </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-200 mt-4">
+              <p className="text-sm md:text-base leading-relaxed text-gray-200 mt-2">
                 {maqam.description}
               </p>
             </div>
@@ -168,7 +169,7 @@ export default function MaqamatPage() {
         ))}
 
         {/* Divider */}
-        <div className="h-[2px] w-2/3 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-60 mt-16" />
+        <div className="h-[1px] w-2/3 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-50 mt-10" />
       </div>
     </div>
   );

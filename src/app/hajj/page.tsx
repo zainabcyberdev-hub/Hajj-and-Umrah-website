@@ -57,7 +57,7 @@ const hajjSteps = [
   },
   { 
     title: "Dua at Arafat", 
-    img: "/arafat.jpg", 
+    img: "/arfat.jpg", 
     dua: "لَا إِلٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيْكَ لَهُ…", 
     translit: "La ilaha illallahu wahdahu la sharika lah…", 
     translation: "There is no god but Allah alone, without partner…",
@@ -87,7 +87,7 @@ export default function HajjGuidePage() {
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-blue-900/70 to-black/80"></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 space-y-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12 space-y-10">
         {/* Heading */}
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
@@ -98,7 +98,7 @@ export default function HajjGuidePage() {
           Complete Hajj Guide
         </motion.h1>
 
-        <section className="space-y-12">
+        <section className="space-y-10">
           <h2
             className={`${marcellus.className} text-2xl font-semibold text-cyan-300 drop-shadow-[0_0_10px_rgba(34,211,238,0.6)]`}
           >
@@ -112,29 +112,29 @@ export default function HajjGuidePage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="grid md:grid-cols-2 gap-8 items-center group"
+              className="grid md:grid-cols-2 gap-6 items-center group"
             >
-              {/* Image with hover effect */}
+              {/* Image */}
               <Image
                 src={step.img}
                 alt={step.title}
-                width={600}
-                height={400}
-                className="rounded-2xl shadow-xl transform transition duration-500 group-hover:scale-105 group-hover:shadow-yellow-400/50"
+                width={400}
+                height={260}
+                className="rounded-xl shadow-lg transform transition duration-500 group-hover:scale-105 group-hover:shadow-yellow-400/50 w-full md:w-[380px] h-auto object-cover"
               />
 
               {/* Card */}
-              <div className="space-y-4 bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-gradient-to-r from-yellow-400 to-green-400 shadow-lg transition duration-500 group-hover:shadow-cyan-400/50">
+              <div className="space-y-2 bg-white/10 backdrop-blur-xl p-5 rounded-xl border border-gradient-to-r from-yellow-400 to-green-400 shadow-md transition duration-500 group-hover:shadow-cyan-400/50">
                 <h3
-                  className={`${marcellus.className} text-xl font-semibold text-yellow-300 drop-shadow-[0_0_8px_rgba(250,204,21,0.7)]`}
+                  className={`${marcellus.className} text-lg font-semibold text-yellow-300 drop-shadow-[0_0_8px_rgba(250,204,21,0.7)]`}
                 >
                   {step.title}
                 </h3>
-                <p className="text-lg leading-relaxed text-gray-200">{step.desc}</p>
+                <p className="text-base leading-relaxed text-gray-200">{step.desc}</p>
 
                 {/* Arabic dua */}
                 <p
-                  className={`${amiri.className} text-2xl text-emerald-300 whitespace-pre-line drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]`}
+                  className={`${amiri.className} text-xl text-emerald-300 whitespace-pre-line drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]`}
                 >
                   {step.dua}
                 </p>
@@ -150,8 +150,9 @@ export default function HajjGuidePage() {
             </motion.div>
           ))}
         </section>
-        <MakkahPage/>
-        <MadinahPage/>
+
+        <MakkahPage />
+        <MadinahPage />
       </div>
     </div>
   );

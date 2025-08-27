@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
-// import LanguageSwitcher from "./Translator";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,22 +21,22 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-lg">
-      {/* Topbar */}
-      <div className="bg-slate-900/70 backdrop-blur-md text-white text-sm py-2 px-4 md:px-6 flex flex-wrap justify-between items-center gap-2 md:gap-6 shadow-sm">
-        <div className="flex flex-wrap items-center gap-3 md:gap-6 w-full md:w-auto justify-center md:justify-start text-center md:text-left">
-          <Link href="/contact" className="hover:text-amber-400">
-            Contact Us
-          </Link>
-          <span className="block">phone: +966920002814</span>
-        </div>
-        
-</div>
+    <header className="sticky top-0 z-50">
+      {/* 🔹 Professional Animated Announcement Bar */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-teal-950 via-blue-950 to-green-950 text-white text-xs md:text-sm font-medium shadow-md">
+        <motion.div
+          className="flex whitespace-nowrap gap-12 py-2 px-4"
+          animate={{ x: ["100%", "-100%"] }}
+          transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+        >
+          <span>✨ Welcome to <strong>Hajj & Umrah</strong> — Your trusted partner for sacred journeys.</span>
+          <span>📌 Book your <strong>2024 Hajj & Umrah Packages</strong> today!</span>
+          <span>📞 Call us anytime: <strong>+966 920002814</strong></span>
+          <span>🕋 Guided tours of <strong>Makkah & Madinah</strong> available.</span>
+        </motion.div>
+      </div>
 
-
-      
-
-      {/* Main Navbar */}
+      {/* 🔹 Main Navbar */}
       <div className="bg-gradient-to-r from-sky-950/80 via-sky-900/70 to-slate-800/60 backdrop-blur-md text-white shadow-md">
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-16 md:h-20">
           {/* Logo */}

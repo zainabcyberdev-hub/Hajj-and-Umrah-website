@@ -72,7 +72,7 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/journey">
+              <Link href="/application">
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white 

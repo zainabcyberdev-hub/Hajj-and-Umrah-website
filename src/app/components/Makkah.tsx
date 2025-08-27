@@ -57,7 +57,7 @@ const MakkahPage: React.FC = () => {
     <div className="relative min-h-screen text-white">
       <div className={`relative z-10 ${inter.className}`}>
         {/* Hero Section */}
-        <section className="py-40 text-center relative">
+        <section className="py-15 text-center relative">
           <motion.h1
             variants={fadeInUp}
             initial="hidden"
@@ -85,8 +85,9 @@ const MakkahPage: React.FC = () => {
         </section>
 
         {/* Hotels */}
-        <section className="py-24 container mx-auto px-6 text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Featured Hotels & Packages</h2>
+        <section className="py-20 container mx-auto px-6 text-left">
+          <h2  className={`${marcellus.className} text-2xl md:text-3xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-500 bg-clip-text text-transparent`}
+         >Featured Hotels & Packages</h2>
           <div className="grid md:grid-cols-3 gap-10">
             {hotels.map((hotel, i) => (
               <motion.div
@@ -122,8 +123,9 @@ const MakkahPage: React.FC = () => {
         </section>
 
         {/* Itinerary */}
-        <section className="py-24 container mx-auto px-6 text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Itinerary Planner</h2>
+        <section className="py-8 container mx-auto px-6 text-left">
+          <h2  className={`${marcellus.className} text-2xl md:text-3xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-500 bg-clip-text text-transparent`}
+         >Itinerary Planner</h2>
           <div className="grid md:grid-cols-5 gap-6">
             {itinerary.map((step, i) => (
               <motion.div
@@ -156,7 +158,8 @@ const MakkahPage: React.FC = () => {
 
         {/* FAQ */}
         <section className="py-24 container mx-auto px-6 text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <h2  className={`${marcellus.className} text-3xl md:text-3xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-orange-300 to-yellow-500 bg-clip-text text-transparent`}
+         >Frequently Asked Questions</h2>
           <div className="space-y-4">
             {faqData.map((faq, i) => (
               <div key={i} className="bg-white/10 p-6 rounded-xl cursor-pointer">

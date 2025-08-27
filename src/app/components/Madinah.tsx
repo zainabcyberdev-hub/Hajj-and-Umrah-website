@@ -45,7 +45,7 @@ export default function MadinahPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="text-center py-28 px-6">
+      <section className="text-center py-2 px-6">
         <FadeInUp>
           <h1
             className={`${marcellus.className} text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-300 via-yellow-200 to-green-400 bg-clip-text text-transparent drop-shadow-lg`}

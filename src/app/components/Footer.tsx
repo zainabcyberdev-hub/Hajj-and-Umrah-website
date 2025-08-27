@@ -6,29 +6,29 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="relative overflow-hidden">
-      {/* Background Gradient & Glow */}
+      {/* Background Glow Effects */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute -top-20 left-10 w-72 h-72 bg-amber-400/40 rounded-full blur-[130px] animate-pulse" />
+        <div className="absolute -top-24 left-10 w-72 h-72 bg-amber-400/40 rounded-full blur-[130px] animate-pulse" />
         <div className="absolute bottom-0 right-10 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[160px] animate-spin-slow" />
       </div>
 
       {/* Glass Container */}
-      <div className="relative backdrop-blur-2xl bg-gradient-to-br from-slate-900/90 via-slate-800/80 to-slate-900/90 border-t border-amber-400/20 shadow-[0_0_50px_rgba(255,193,7,0.15)]">
-        <div className="container mx-auto px-6 py-20">
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-16">
+      <div className="relative backdrop-blur-2xl bg-gradient-to-br from-slate-900/95 via-slate-800/85 to-slate-900/95 border-t border-amber-400/20 shadow-[0_0_50px_rgba(255,193,7,0.1)]">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-14">
             
             {/* Logo / About */}
             <div className="space-y-6">
-              <div className="flex items-center  text-white space-x-3 group">
+              <div className="flex items-center text-white space-x-3 group">
                 <div className="w-16 h-16 bg-gradient-to-r from-amber-400 to-yellow-500 rounded-2xl flex items-center justify-center text-white font-bold text-3xl shadow-lg group-hover:scale-110 transition-transform duration-300">
                   H
                 </div>
-                <span className="text-2xl font-bold tracking-wide group-hover:text-amber-400 transition">
+                <span className="text-2xl font-bold tracking-wide group-hover:text-amber-400 transition-colors">
                   Hajj & Umrah
                 </span>
               </div>
               <p className="text-white/70 leading-relaxed max-w-xs">
-                Trusted companion for planning, booking, and experiencing your sacred journey to Makkah & Madinah.
+                Your trusted companion for planning, booking, and experiencing the sacred journey to Makkah & Madinah.
               </p>
 
               {/* Social Icons */}
@@ -48,7 +48,7 @@ const Footer = () => {
 
             {/* Services */}
             <div className="space-y-6">
-              <h3 className="text-xl font-bold text-amber-400 relative inline-block after:content-[''] after:block after:h-[2px] after:w-12 after:bg-amber-400 after:mt-2">
+              <h3 className="text-xl font-bold text-amber-400 relative inline-block after:block after:h-[2px] after:w-12 after:bg-amber-400 after:mt-2">
                 Services
               </h3>
               <ul className="space-y-3">
@@ -62,7 +62,7 @@ const Footer = () => {
                   <li key={i}>
                     <Link
                       href={item.href}
-                      className="text-white/70 hover:text-amber-400 transition-colors hover:pl-2 block duration-300"
+                      className="text-white/70 hover:text-amber-400 transition-all hover:pl-2 block duration-300"
                     >
                       {item.name}
                     </Link>
@@ -73,7 +73,7 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="space-y-6">
-              <h3 className="text-xl font-bold text-amber-400 relative inline-block after:content-[''] after:block after:h-[2px] after:w-12 after:bg-amber-400 after:mt-2">
+              <h3 className="text-xl font-bold text-amber-400 relative inline-block after:block after:h-[2px] after:w-12 after:bg-amber-400 after:mt-2">
                 Contact
               </h3>
               <div className="space-y-4 text-white/80">
@@ -93,7 +93,7 @@ const Footer = () => {
 
               {/* Newsletter */}
               <div className="space-y-3">
-                <h4 className="font-semibold">Subscribe to Updates</h4>
+                <h4 className="font-semibold text-white">Subscribe to Updates</h4>
                 <div className="flex space-x-2">
                   <Input
                     placeholder="Your email"
@@ -106,32 +106,10 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Quick Links */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-bold text-amber-400 relative inline-block after:content-[''] after:block after:h-[2px] after:w-12 after:bg-amber-400 after:mt-2">
-                Quick Links
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  { name: "Privacy Policy", href: "/privacy" },
-                  { name: "Terms of Service", href: "/terms" },
-                  { name: "FAQs", href: "/faqs" },
-                ].map((item, i) => (
-                  <li key={i}>
-                    <Link
-                      href={item.href}
-                      className="text-white/70 hover:text-amber-400 transition-colors hover:pl-2 block duration-300"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-white/10 pt-8">
+          <div className="border-t border-white/10 pt-6">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
               <p>© 2024 Hajj & Umrah. All rights reserved.</p>
               <div className="flex space-x-6">
