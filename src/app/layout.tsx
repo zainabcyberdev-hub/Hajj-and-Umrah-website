@@ -5,6 +5,8 @@ import { TooltipProvider } from "../components/ui/tooltip";
 import ReactQueryProvider from "./components/ReactQueryProvider";
 import Header from "./components/Navbar";
 import Footer from "./components/Footer";
+import WhatsAppButton from "./components/WhatsappIco";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 export const metadata: Metadata = {
   title: "Hajj & Umrah",
@@ -32,6 +34,8 @@ export default function RootLayout({
               </div>
             </div>
             <Footer />
+            <WhatsAppButton /> 
+            <ScrollToTopButton />
           </TooltipProvider>
         </ReactQueryProvider>
       </body>

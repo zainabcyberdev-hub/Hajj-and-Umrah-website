@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image"; // ✅ Image import kiya
+import Image from "next/image";
 import { Card } from "../../components/ui/card";
 import {
   FileText,
@@ -13,13 +13,11 @@ import {
 } from "lucide-react";
 import { Merienda, Playfair_Display } from "next/font/google";
 
-// Main Heading Font
 const merienda = Merienda({
   subsets: ["latin"],
   weight: ["400", "700"],
 });
 
-// Card Titles Font
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["600", "700"],
@@ -78,19 +76,20 @@ const services = [
 export default function Services() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Sticky Background Image */}
-      <div
-        className="absolute inset-0 bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: "url('/servicesBack.png')" }}
-      >
-        <div className="absolute inset-0 bg-white/50 backdrop-blur-sm" />
-      </div>
+    {/* Fixed Background */}
+<div
+  className="absolute inset-0 bg-fixed bg-center bg-cover"
+  style={{ backgroundImage: "url('/servicesBack.png')" }}
+>
+  {/* Overlay for readability */}
+  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm" />
+</div>
 
       {/* Content */}
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
@@ -98,11 +97,11 @@ export default function Services() {
         >
           <h2
             className={`${merienda.className} text-4xl sm:text-5xl md:text-6xl font-bold 
-              bg-gradient-to-r from-teal-950 to-blue-900 bg-clip-text text-transparent`}
+              bg-gradient-to-r from-amber-400 to-amber-300 bg-clip-text text-transparent drop-shadow-lg`}
           >
             Our Services
           </h2>
-          <p className="text-teal-950 sm:text-lg md:text-xl text-muted-foreground leading-relaxed mt-6">
+          <p className="text-amber-500 sm:text-lg md:text-xl leading-relaxed mt-6">
             From visa applications to guided tours, we provide everything you
             need for a seamless and spiritual pilgrimage experience.
           </p>
@@ -122,10 +121,10 @@ export default function Services() {
               >
                 <Card
                   className="p-0 overflow-hidden rounded-3xl 
-                  border border-white/20 
-                  bg-white/10 backdrop-blur-md 
-                  shadow-lg hover:shadow-2xl 
-                  hover:border-primary/50 
+                  border border-white/30 
+                  bg-white/50 backdrop-blur-xl 
+                  shadow-xl hover:shadow-2xl 
+                  hover:border-primary/60 
                   hover:-translate-y-3 transition-all duration-500 group"
                 >
                   {/* Image */}
@@ -144,7 +143,7 @@ export default function Services() {
                     {/* Icon */}
                     <div
                       className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center 
-                                  shadow-lg group-hover:scale-110 transition-transform duration-300`}
+                                  shadow-md group-hover:scale-110 transition-transform duration-300`}
                     >
                       <Icon className="h-8 w-8 text-white" />
                     </div>
@@ -152,11 +151,11 @@ export default function Services() {
                     {/* Title & Description */}
                     <div className="space-y-3">
                       <h3
-                        className={`${playfair.className} text-xl sm:text-2xl font-semibold text-foreground group-hover:text-primary transition-colors`}
+                        className={`${playfair.className} text-xl sm:text-2xl font-semibold text-gray-900 group-hover:text-primary transition-colors`}
                       >
                         {service.title}
                       </h3>
-                      <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
+                      <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
