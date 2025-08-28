@@ -78,7 +78,7 @@ export default function HajjGuidePage() {
     <div
       className="relative min-h-screen text-white"
       style={{
-        backgroundImage: "url('/images/hajj-bg.jpg')",
+        backgroundImage: "url('/hajj-background.jpg')",
         backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
