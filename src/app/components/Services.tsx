@@ -46,8 +46,7 @@ const services = [
   {
     icon: Hotel,
     title: "Accommodation",
-    description:
-      "Book verified hotels in Makkah, Madina and other holy cities",
+    description: "Book verified hotels in Makkah, Madina and other holy cities",
     color: "bg-gradient-to-r from-amber-500 to-yellow-600",
     image: "/hotels.jpg",
   },
@@ -93,7 +92,7 @@ export default function Services() {
   };
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-28 overflow-hidden">
+    <section className="relative py-12 sm:py-16 md:py-24 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 bg-fixed bg-center bg-cover"
@@ -103,14 +102,14 @@ export default function Services() {
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20"
+          className="text-center mx-auto mb-10 sm:mb-14 md:mb-20"
         >
           <motion.h2
             initial={{ scale: 0.9 }}
@@ -122,7 +121,7 @@ export default function Services() {
           >
             Our Services
           </motion.h2>
-          <p className="text-amber-400 text-base sm:text-lg md:text-xl leading-relaxed mt-4 sm:mt-6">
+          <p className="text-amber-400 text-sm sm:text-base md:text-lg leading-relaxed mt-4 sm:mt-6 max-w-2xl mx-auto">
             From visa applications to guided tours, we provide everything you
             need for a seamless and spiritual pilgrimage experience.
           </p>
@@ -139,10 +138,10 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="px-3 sm:px-4"
+                className="px-2 sm:px-3"
               >
                 <Card
-                  className="p-0 overflow-hidden rounded-2xl sm:rounded-3xl 
+                  className="p-0 w-full max-w-sm mx-auto overflow-hidden rounded-xl sm:rounded-2xl 
                   border border-white/20 sm:border-white/30 
                   bg-white/60 backdrop-blur-xl 
                   shadow-lg hover:shadow-2xl 
@@ -151,7 +150,7 @@ export default function Services() {
                   transition-all duration-500 group"
                 >
                   {/* Image */}
-                  <div className="h-40 sm:h-48 md:h-56 lg:h-64 w-full relative overflow-hidden">
+                  <div className="h-40 sm:h-48 md:h-56 w-full relative overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -162,25 +161,25 @@ export default function Services() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
+                  <div className="p-4 sm:p-5 md:p-6 space-y-3 sm:space-y-4">
                     {/* Icon */}
                     <div
                       className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${service.color} 
-                        rounded-xl sm:rounded-2xl flex items-center justify-center 
+                        rounded-xl flex items-center justify-center 
                         shadow-md group-hover:scale-110 transition-transform duration-300`}
                     >
                       <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
                     </div>
 
                     {/* Title & Description */}
-                    <div className="space-y-2 sm:space-y-3">
+                    <div className="space-y-1 sm:space-y-2">
                       <h3
-                        className={`${playfair.className} text-lg sm:text-xl md:text-2xl font-bold text-gray-900 
+                        className={`${playfair.className} text-base sm:text-lg md:text-xl font-bold text-gray-900 
                           group-hover:text-amber-600 transition-colors`}
                       >
                         {service.title}
                       </h3>
-                      <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
+                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
