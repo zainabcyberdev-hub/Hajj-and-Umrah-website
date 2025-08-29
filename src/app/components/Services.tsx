@@ -87,14 +87,14 @@ export default function Services() {
     slidesToScroll: 1,
     pauseOnHover: true,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 640, settings: { slidesToShow: 1 } },
+      { breakpoint: 1280, settings: { slidesToShow: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 1, arrows: false } },
     ],
   };
 
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
-      {/* Fixed Background */}
+    <section className="relative py-16 sm:py-20 md:py-28 overflow-hidden">
+      {/* Background */}
       <div
         className="absolute inset-0 bg-fixed bg-center bg-cover"
         style={{ backgroundImage: "url('/servicesBack.png')" }}
@@ -110,29 +110,25 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto mb-16 md:mb-24"
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 md:mb-20"
         >
           <motion.h2
             initial={{ scale: 0.9 }}
             whileInView={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
-            className={`${merienda.className} text-4xl sm:text-5xl md:text-6xl font-bold 
+            className={`${merienda.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold 
               bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent 
               drop-shadow-[2px_4px_6px_rgba(0,0,0,0.6)]`}
-            style={{
-              textShadow:
-                "2px 2px 8px rgba(0,0,0,0.6), 0px 0px 15px rgba(255,215,0,0.7)",
-            }}
           >
             Our Services
           </motion.h2>
-          <p className="text-amber-400 sm:text-lg md:text-xl leading-relaxed mt-6">
+          <p className="text-amber-400 text-base sm:text-lg md:text-xl leading-relaxed mt-4 sm:mt-6">
             From visa applications to guided tours, we provide everything you
             need for a seamless and spiritual pilgrimage experience.
           </p>
         </motion.div>
 
-        {/* Services Slider */}
+        {/* Slider */}
         <Slider {...settings}>
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -143,18 +139,19 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="px-4"
+                className="px-3 sm:px-4"
               >
                 <Card
-                  className="p-0 overflow-hidden rounded-3xl 
-                  border border-white/30 
-                  bg-white/50 backdrop-blur-xl 
-                  shadow-xl hover:shadow-2xl 
+                  className="p-0 overflow-hidden rounded-2xl sm:rounded-3xl 
+                  border border-white/20 sm:border-white/30 
+                  bg-white/60 backdrop-blur-xl 
+                  shadow-lg hover:shadow-2xl 
                   hover:border-amber-400 
-                  hover:-translate-y-3 transition-all duration-500 group"
+                  hover:-translate-y-2 sm:hover:-translate-y-3 
+                  transition-all duration-500 group"
                 >
                   {/* Image */}
-                  <div className="h-48 sm:h-52 md:h-56 lg:h-60 w-full relative overflow-hidden">
+                  <div className="h-40 sm:h-48 md:h-56 lg:h-64 w-full relative overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -165,23 +162,21 @@ export default function Services() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 md:p-8 space-y-6">
+                  <div className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                     {/* Icon */}
                     <div
-                      className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center 
+                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${service.color} 
+                        rounded-xl sm:rounded-2xl flex items-center justify-center 
                         shadow-md group-hover:scale-110 transition-transform duration-300`}
                     >
-                      <Icon className="h-8 w-8 text-white" />
+                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
                     </div>
 
                     {/* Title & Description */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       <h3
-                        className={`${playfair.className} text-xl sm:text-2xl font-bold text-gray-900 
+                        className={`${playfair.className} text-lg sm:text-xl md:text-2xl font-bold text-gray-900 
                           group-hover:text-amber-600 transition-colors`}
-                        style={{
-                          textShadow: "1px 1px 4px rgba(0,0,0,0.3)",
-                        }}
                       >
                         {service.title}
                       </h3>
