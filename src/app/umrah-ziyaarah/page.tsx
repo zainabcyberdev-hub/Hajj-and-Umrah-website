@@ -41,7 +41,7 @@ const maqamat = [
     title: "Arafat",
     description:
       "The plain of Arafat is where the central rite of Hajj, Wuquf, takes place. It is known as the 'Mount of Mercy'.",
-    image: "/arafat.jpg",
+    image: "/arfat.jpg",
   },
   {
     title: "Muzdalifah",
@@ -63,7 +63,7 @@ const maqamat = [
   {
     title: "Jannat-ul-Mualla",
     description:
-      "A famous cemetery in Makkah where many of the Prophet’s family members are buried.",
+      "A famous cemetery in Makkah where many of the Prophet's family members are buried.",
     image: "/jannatUlMualla.jpg",
   },
   {
@@ -75,8 +75,8 @@ const maqamat = [
   {
     title: "Masjid Al Ejabah",
     description:
-      "A mosque in Makkah known for the acceptance of the Prophet’s (PBUH) prayers.",
-    image: "/ejabah.jpg",
+      "A mosque in Makkah known for the acceptance of the Prophet's (PBUH) prayers.",
+    image: "/ejabah.png",
   },
   {
     title: "Masjid Jin",
@@ -85,7 +85,6 @@ const maqamat = [
     image: "/jin.jpg",
   },
 ];
-
 export default function MaqamatPage() {
   return (
     <div className="relative min-h-screen text-white">
@@ -96,27 +95,27 @@ export default function MaqamatPage() {
           alt="Background"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-black/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/85 to-black/95" />
       </div>
 
       {/* Hero Section */}
       <section className="relative z-10 text-center py-16 md:py-24 px-6">
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           className={`${merienda.className} text-4xl md:text-6xl font-bold 
-          text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500
-          drop-shadow-[0_0_15px_rgba(250,204,21,0.7)]`}
+          text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-500`}
         >
           Sacred Maqamat and Ziyaarah
         </motion.h1>
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
           className="mt-4 max-w-3xl mx-auto text-base md:text-lg text-gray-200 leading-relaxed"
         >
           Explore the blessed landmarks and sacred sites visited by millions of
@@ -129,32 +128,38 @@ export default function MaqamatPage() {
         {maqamat.map((maqam, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.05 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
             className={`flex flex-col ${
               i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-            } items-center gap-6 md:gap-10 group`}
+            } items-center gap-6 md:gap-10`}
           >
             {/* Image */}
-            <div className="w-full md:w-1/2 overflow-hidden rounded-xl shadow-lg">
-              <div className="relative w-full h-[320px]"> {/* Fixed height */}
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.4 }}
+              className="w-full md:w-1/2 overflow-hidden rounded-xl shadow-lg shadow-black/40"
+            >
+              <div className="relative w-full h-[240px] md:h-[280px] lg:h-[320px]">
                 <Image
                   src={maqam.image}
                   alt={maqam.title}
                   fill
-                  className="rounded-xl object-cover transition duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="rounded-xl object-cover object-center transition-transform duration-700 ease-out hover:scale-110"
                 />
+                {/* Overlay effect */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
               </div>
-            </div>
+            </motion.div>
 
             {/* Content */}
             <div
               className="w-full md:w-1/2 p-6 md:p-7 rounded-xl 
-              bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md 
-              border border-yellow-400/30 shadow-md 
-              transition duration-500 group-hover:shadow-yellow-300/40 group-hover:scale-[1.01]"
+              bg-white/5 backdrop-blur-md border border-yellow-400/30 shadow-md 
+              transition duration-300 hover:shadow-yellow-400/30 hover:scale-[1.01]"
             >
               <h2
                 className={`${merienda.className} text-xl md:text-2xl font-semibold text-yellow-300`}
@@ -169,7 +174,7 @@ export default function MaqamatPage() {
         ))}
 
         {/* Divider */}
-        <div className="h-[1px] w-2/3 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-50 mt-10" />
+        <div className="h-[1px] w-2/3 mx-auto bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-40 mt-10" />
       </div>
     </div>
   );

@@ -1,25 +1,25 @@
 "use client";
 
 import { Button } from "../../components/ui/button";
-import { motion, Variants } from "framer-motion";
-import { Merienda } from "next/font/google";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+// Google Fonts
+import { Merienda, Orbitron } from "next/font/google";
 
 const meriendaFont = Merienda({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
 
-// ✅ Typed Variants
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
-  },
-};
+const orbitronFont = Orbitron({
+  weight: ["600", "700"],
+  subsets: ["latin"],
+});
 
 export default function PackagesSection() {
   const router = useRouter();
@@ -61,6 +61,23 @@ export default function PackagesSection() {
     },
   ];
 
+  // Slick Settings
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true, // hover par ruk jaye
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: "0px",
+    responsive: [
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 1 } },
+    ],
+  };
+
   return (
     <section
       className="relative py-28 text-white bg-fixed bg-center bg-cover"
@@ -68,17 +85,23 @@ export default function PackagesSection() {
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
+
       <div className="container mx-auto px-6 relative z-10">
         {/* Heading */}
         <motion.div
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeUp}
-          className="text-center mb-20"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
           <h2
-            className={`${meriendaFont.className} text-4xl lg:text-5xl font-bold mb-6 leading-tight bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent`}
+            className={`${orbitronFont.className} text-4xl lg:text-5xl font-bold mb-6 
+              leading-tight bg-gradient-to-r from-amber-400 to-yellow-500 
+              bg-clip-text text-transparent drop-shadow-2xl`}
+            style={{
+              textShadow: "0px 4px 25px rgba(255, 193, 7, 0.9)", // glowing depth
+            }}
           >
             Our Hajj & Umrah Packages
           </h2>
@@ -88,50 +111,75 @@ export default function PackagesSection() {
           </p>
         </motion.div>
 
-        {/* Packages */}
-        <div className="grid gap-10 md:grid-cols-3">
+        {/* Slick Slider */}
+        <Slider {...settings}>
           {packages.map((pkg, index) => (
             <motion.div
               key={index}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="relative group bg-white/10 backdrop-blur-xl p-8 rounded-2xl shadow-2xl 
-              border border-white/10 hover:border-amber-400/40 
-              hover:shadow-amber-400/30 transition-all duration-300 transform hover:-translate-y-2"
+              whileHover={{
+                rotateY: 15,
+                rotateX: 5,
+                scale: 1.05,
+              }}
+              transition={{ type: "spring", stiffness: 200, damping: 18 }}
+              className="px-4 perspective-1000"
             >
-              {/* Price Badge */}
-              <div className="absolute -top-5 right-6 px-4 py-2 bg-gradient-to-r from-amber-400 to-yellow-500 text-black text-sm font-bold rounded-full shadow-lg">
-                {pkg.price}
+              <div
+                className="relative group bg-white/10 backdrop-blur-xl p-8 rounded-3xl shadow-2xl 
+                border border-white/10 hover:border-amber-400/40 
+                hover:shadow-amber-400/40 transition-all duration-500"
+                style={{
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                {/* Price Badge */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring" }}
+                  className="absolute -top-5 right-6 px-4 py-2 
+                  bg-gradient-to-r from-amber-400 to-yellow-500 
+                  text-black text-sm font-bold rounded-full shadow-lg"
+                  style={{
+                    transform: "translateZ(40px)", // price badge in 3D layer
+                  }}
+                >
+                  {pkg.price}
+                </motion.div>
+
+                <h3
+                  className={`${meriendaFont.className} text-2xl font-bold mb-4 text-amber-400`}
+                  style={{ transform: "translateZ(30px)" }}
+                >
+                  {pkg.name}
+                </h3>
+
+                <ul
+                  className="space-y-3 text-gray-200 mb-8"
+                  style={{ transform: "translateZ(20px)" }}
+                >
+                  {pkg.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2">
+                      <CheckCircle2 className="text-yellow-400 w-5 h-5" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  size="lg"
+                  className="w-full bg-gradient-to-r from-amber-400 to-yellow-500 
+                  text-black font-semibold shadow-lg hover:opacity-90 
+                  hover:shadow-amber-400/50 transition-all"
+                  style={{ transform: "translateZ(25px)" }}
+                  onClick={() => router.push("/application")}
+                >
+                  Book Now
+                </Button>
               </div>
-
-              <h3
-                className={`${meriendaFont.className} text-2xl font-bold mb-4 text-amber-400`}
-              >
-                {pkg.name}
-              </h3>
-
-              <ul className="space-y-3 text-gray-200 mb-8">
-                {pkg.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center gap-2">
-                    <CheckCircle2 className="text-yellow-400 w-5 h-5" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                size="lg"
-                className="w-full bg-gradient-to-r from-amber-400 to-yellow-500 text-black font-semibold shadow-lg hover:opacity-90 hover:shadow-amber-400/50 transition-all"
-                onClick={() => router.push("/application")}
-              >
-                Book Now
-              </Button>
             </motion.div>
           ))}
-        </div>
+        </Slider>
       </div>
     </section>
   );

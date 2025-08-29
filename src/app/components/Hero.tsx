@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Merienda } from "next/font/google";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -15,17 +15,42 @@ const merienda = Merienda({
 });
 
 const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     loop: true,
     slides: { perView: 1 },
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel);
+    },
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startAutoPlay = () => {
+    if (intervalRef.current) return;
+    intervalRef.current = setInterval(() => {
       instanceRef.current?.next();
-    }, 3000);
-    return () => clearInterval(interval);
+    }, 4000);
+  };
+
+  const stopAutoPlay = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    startAutoPlay();
+    return () => stopAutoPlay();
   }, [instanceRef]);
+
+  const images = [
+    { src: "/background1.jpg", alt: "Hajj Image 1" },
+    { src: "/background.svg", alt: "Hajj Image 2" },
+    { src: "/background2.jpg", alt: "Hajj Image 3" },
+    { src: "/background3.jpg", alt: "Hajj Image 4" },
+  ];
 
   return (
     <section
@@ -41,7 +66,6 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center">
-
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -49,13 +73,11 @@ const Hero = () => {
             transition={{ duration: 1 }}
             className="space-y-8 text-center lg:text-left"
           >
-            {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white text-xs sm:text-sm">
               <Star className="h-4 w-4 text-amber-400" />
               <span>Official Hajj & Umrah Platform</span>
             </div>
 
-            {/* Heading */}
             <div className="space-y-6">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
                 Begin Your Sacred{" "}
@@ -70,7 +92,6 @@ const Hero = () => {
               </p>
             </div>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link href="/application">
                 <Button
@@ -108,45 +129,6 @@ const Hero = () => {
                 </Button>
               </Link>
             </div>
-
-            {/* Stats */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-8 pt-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-center"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-amber-400">
-                  2M+
-                </div>
-                <div className="text-sm text-white/80">Pilgrims Served</div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-                className="text-center"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-amber-400">
-                  50+
-                </div>
-                <div className="text-sm text-white/80">Countries</div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.9 }}
-                className="text-center"
-              >
-                <div className="text-2xl sm:text-3xl font-bold text-amber-400">
-                  24/7
-                </div>
-                <div className="text-sm text-white/80">Support</div>
-              </motion.div>
-            </div>
           </motion.div>
 
           {/* Right Content - Image Slider */}
@@ -154,48 +136,44 @@ const Hero = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="flex justify-center lg:justify-end"
+            className="flex flex-col items-center lg:items-end"
           >
             <div
               ref={sliderRef}
+              onMouseEnter={stopAutoPlay}
+              onMouseLeave={startAutoPlay}
               className="keen-slider rounded-2xl overflow-hidden shadow-xl w-full max-w-md sm:max-w-lg lg:max-w-full"
             >
-              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
-                <Image
-                  src="/background1.jpg"
-                  alt="Hajj Image 1"
-                  fill
-                  className="object-cover rounded-2xl"
-                  priority
-                />
-              </div>
-              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
-                <Image
-                  src="/background.svg"
-                  alt="Hajj Image 2"
-                  fill
-                  className="object-cover rounded-2xl"
-                  priority
-                />
-              </div>
-              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
-                <Image
-                  src="/background2.jpg"
-                  alt="Hajj Image 3"
-                  fill
-                  className="object-cover rounded-2xl"
-                  priority
-                />
-              </div>
-              <div className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]">
-                <Image
-                  src="/background3.jpg"
-                  alt="Hajj Image 4"
-                  fill
-                  className="object-cover rounded-2xl"
-                  priority
-                />
-              </div>
+              {images.map((img, idx) => (
+                <div
+                  key={idx}
+                  className="keen-slider__slide relative h-56 sm:h-72 md:h-80 lg:h-[350px]"
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover rounded-2xl"
+                    priority
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Progress Indicators */}
+            <div className="flex gap-2 mt-4">
+              {images.map((_, idx) => (
+                <div
+                  key={idx}
+                  className="relative w-10 h-1 bg-white/30 rounded-full overflow-hidden"
+                >
+                  <div
+                    className={`absolute left-0 top-0 h-full bg-amber-400 transition-all duration-[4000ms] ${
+                      currentSlide === idx ? "w-full" : "w-0"
+                    }`}
+                  ></div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
