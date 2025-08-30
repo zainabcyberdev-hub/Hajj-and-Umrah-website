@@ -86,7 +86,7 @@ export default function Services() {
     slidesToScroll: 1,
     pauseOnHover: true,
     responsive: [
-      { breakpoint: 1280, settings: { slidesToShow: 2 } }, // laptop
+      { breakpoint: 1280, settings: { slidesToShow: 3 } }, // desktop large
       { breakpoint: 1024, settings: { slidesToShow: 2 } }, // tablet landscape
       { breakpoint: 768, settings: { slidesToShow: 1, arrows: false } }, // tablet portrait
       { breakpoint: 480, settings: { slidesToShow: 1, arrows: false } }, // mobile
@@ -99,7 +99,7 @@ export default function Services() {
       <div className="absolute inset-0 bg-gradient-to-b from-teal-950 via-blue-950 to-teal-950 opacity-95" />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -122,7 +122,7 @@ export default function Services() {
         </motion.div>
 
         {/* Slider */}
-        <Slider {...settings} className="px-2 sm:px-6">
+        <Slider {...settings} className="px-1 sm:px-4">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -132,19 +132,18 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="px-4"
+                className="px-2"
               >
                 <Card
-                  className="p-0 w-full max-w-sm mx-auto overflow-hidden rounded-3xl 
+                  className="p-0 w-full mx-auto overflow-hidden rounded-3xl 
                   border border-white/20 bg-white/70 backdrop-blur-xl 
                   shadow-xl hover:shadow-2xl 
                   hover:border-amber-400 hover:shadow-amber-200/50
                   hover:-translate-y-3 
-                  transition-all duration-500 group
-                  min-w-[280px]"
+                  transition-all duration-500 group"
                 >
                   {/* Image */}
-                  <div className="h-48 sm:h-56 md:h-60 w-full relative overflow-hidden">
+                  <div className="h-44 sm:h-52 md:h-60 w-full relative overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -155,14 +154,14 @@ export default function Services() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 md:p-7 space-y-4">
+                  <div className="p-5 sm:p-6 md:p-7 space-y-4">
                     {/* Icon */}
                     <div
-                      className={`w-14 h-14 md:w-16 md:h-16 ${service.color} 
+                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${service.color} 
                         rounded-xl flex items-center justify-center 
                         shadow-lg group-hover:scale-110 transition-transform duration-300`}
                     >
-                      <Icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
+                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
                     </div>
 
                     {/* Title & Description */}
