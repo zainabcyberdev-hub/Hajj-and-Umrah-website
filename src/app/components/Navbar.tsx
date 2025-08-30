@@ -3,13 +3,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const marqueeControls = useAnimation();
 
   const isActive = (path: string) => pathname === path;
 
@@ -24,35 +23,16 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50">
       {/* 🔹 Professional Animated Announcement Bar */}
-      <div
-        className="relative overflow-hidden bg-gradient-to-r from-teal-950 via-blue-950 to-green-950 text-white text-xs md:text-sm font-medium shadow-md"
-        onMouseEnter={() => marqueeControls.stop()} // hover par stop
-        onMouseLeave={() =>
-          marqueeControls.start({
-            x: ["100%", "-100%"],
-            transition: { repeat: Infinity, duration: 25, ease: "linear" },
-          })
-        } // hover chhodte hi resume
-      >
+      <div className="relative overflow-hidden bg-gradient-to-r from-teal-950 via-blue-950 to-green-950 text-white text-xs md:text-sm font-medium shadow-md">
         <motion.div
           className="flex whitespace-nowrap gap-12 py-2 px-4"
-          animate={marqueeControls}
-          initial={{ x: "100%" }}
+          animate={{ x: ["100%", "-100%"] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
-          <span>
-            ✨ Welcome to <strong>Hajj & Umrah</strong> — Your trusted partner
-            for sacred journeys.
-          </span>
-          <span>
-            📌 Book your <strong>2024 Hajj & Umrah Packages</strong> today!
-          </span>
-          <span>
-            📞 Call us anytime: <strong>+966 920002814</strong>
-          </span>
-          <span>
-            🕋 Guided tours of <strong>Makkah & Madinah</strong> available.
-          </span>
+          <span>✨ Welcome to <strong>Hajj & Umrah</strong> — Your trusted partner for sacred journeys.</span>
+          <span>📌 Book your <strong>2024 Hajj & Umrah Packages</strong> today!</span>
+          <span>📞 Call us anytime: <strong>+966 920002814</strong></span>
+          <span>🕋 Guided tours of <strong>Makkah & Madinah</strong> available.</span>
         </motion.div>
       </div>
 
