@@ -21,7 +21,7 @@ const Footer = () => {
       </div>
 
       {/* Glass Container */}
-      <div className="relative backdrop-blur-xl bg-gradient-to-br from-slate-900/95 via-slate-800/85 to-slate-900/95 border-t border-amber-400/20 shadow-[0_0_30px_rgba(255,193,7,0.08)]">
+      <div className="relative backdrop-blur-xl bg-gradient-to-br from-slate-900/95 via-sky-800/85 to-slate-900/95 border-t border-amber-400/20 shadow-[0_0_30px_rgba(255,193,7,0.08)]">
         <div className="container mx-auto px-4 py-10 md:py-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             {/* Logo / About */}

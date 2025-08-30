@@ -21,36 +21,45 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* 🔹 Professional Animated Announcement Bar */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-teal-950 via-blue-950 to-green-950 text-white text-xs md:text-sm font-medium shadow-md">
+    <header className="sticky top-0 z-50 w-full">
+      {/* 🔹 Announcement Bar */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-black via-blue-950 to-green-950 text-white text-xs sm:text-sm font-medium shadow-md">
         <motion.div
           className="flex whitespace-nowrap gap-12 py-2 px-4"
           animate={{ x: ["100%", "-100%"] }}
           transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
         >
-          <span>✨ Welcome to <strong>Hajj & Umrah</strong> — Your trusted partner for sacred journeys.</span>
-          <span>📌 Book your <strong>2024 Hajj & Umrah Packages</strong> today!</span>
-          <span>📞 Call us anytime: <strong>+966 920002814</strong></span>
-          <span>🕋 Guided tours of <strong>Makkah & Madinah</strong> available.</span>
+          <span>
+            ✨ Welcome to <strong>Hajj & Umrah</strong> — Your trusted partner
+            for sacred journeys.
+          </span>
+          <span>
+            📌 Book your <strong>2024 Hajj & Umrah Packages</strong> today!
+          </span>
+          <span>
+            📞 Call us anytime: <strong>+966 920002814</strong>
+          </span>
+          <span>
+            🕋 Guided tours of <strong>Makkah & Madinah</strong> available.
+          </span>
         </motion.div>
       </div>
 
-      {/* 🔹 Main Navbar */}
-      <div className="bg-gradient-to-r from-sky-950/80 via-sky-900/70 to-slate-800/60 backdrop-blur-md text-white shadow-md">
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center h-16 md:h-20">
+      {/* 🔹 Navbar */}
+      <div className="bg-gradient-to-r from-sky-950/80 via-sky-900/60 to-slate-800/60 backdrop-blur-md text-white shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 md:space-x-3">
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
             <Logo />
           </Link>
 
           {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center space-x-8 lg:space-x-10">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-10">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`transition-all text-base lg:text-lg tracking-wide ${
+                className={`transition-all text-sm lg:text-base xl:text-lg tracking-wide ${
                   isActive(link.href)
                     ? "text-amber-400 border-b-2 border-amber-400 pb-1"
                     : "hover:text-amber-300"
@@ -61,9 +70,9 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Right Actions */}
+          {/* Desktop CTA */}
           <div className="hidden md:flex items-center">
-            <button className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-4 py-2 md:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition text-sm md:text-base">
+            <button className="bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-4 py-2 sm:px-5 lg:px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition text-xs sm:text-sm md:text-base">
               Saudi eVisa
             </button>
           </div>
@@ -72,12 +81,17 @@ const Header = () => {
           <button
             className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Menu"
           >
-            {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+            {isMenuOpen ? (
+              <X className="h-7 w-7" />
+            ) : (
+              <Menu className="h-7 w-7" />
+            )}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* 🔹 Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -85,14 +99,14 @@ const Header = () => {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-slate-900/90 backdrop-blur-md text-white px-6 py-6 shadow-inner"
+              className="md:hidden bg-slate-900/95 backdrop-blur-md text-white px-6 py-6 shadow-inner"
             >
-              <nav className="flex flex-col space-y-4">
+              <nav className="flex flex-col space-y-5">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`transition-colors text-base ${
+                    className={`transition-colors text-base sm:text-lg ${
                       isActive(link.href)
                         ? "text-amber-400 font-semibold"
                         : "hover:text-amber-300"
@@ -104,7 +118,7 @@ const Header = () => {
                 ))}
 
                 {/* Mobile CTA Button */}
-                <button className="mt-6 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-5 py-2 w-full rounded-full shadow-md hover:shadow-lg hover:scale-105 transition text-sm">
+                <button className="mt-6 bg-gradient-to-r from-amber-500 to-yellow-600 text-white px-5 py-2 w-full rounded-full shadow-md hover:shadow-lg hover:scale-105 transition text-sm sm:text-base">
                   Saudi eVisa
                 </button>
               </nav>

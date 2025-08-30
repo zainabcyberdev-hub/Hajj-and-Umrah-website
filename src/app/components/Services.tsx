@@ -78,13 +78,9 @@ export default function Services() {
   return (
     <section className="relative py-20 md:py-28 overflow-hidden">
     {/* Fixed Background */}
-<div
-  className="absolute inset-0 bg-fixed bg-center bg-cover"
-  style={{ backgroundImage: "url('/servicesBack.png')" }}
->
+
   {/* Overlay for readability */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm" />
-</div>
+  <div className="absolute inset-0 bg-gradient-to-b from-black/100 via-sky-900/85 to-black/85 backdrop-blur-sm" />
 
       {/* Content */}
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
