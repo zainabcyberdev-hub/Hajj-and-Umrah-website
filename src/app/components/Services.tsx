@@ -94,19 +94,19 @@ export default function Services() {
   };
 
   return (
-    <section className="relative py-16 sm:py-20 lg:py-28 overflow-hidden">
+    <section className="relative py-14 sm:py-20 lg:py-28 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-teal-950 via-blue-950 to-teal-950 opacity-95" />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-10">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9 }}
-          className="text-center mb-14 sm:mb-20"
+          className="text-center mb-12 sm:mb-16 lg:mb-20"
         >
           <h2
             className={`${merienda.className} text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold 
@@ -115,14 +115,14 @@ export default function Services() {
           >
             Our Premium Services
           </h2>
-          <p className="mt-6 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed">
+          <p className="mt-5 max-w-2xl mx-auto text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed">
             Experience luxury, comfort, and spirituality through our
             all-inclusive services crafted for your sacred journey.
           </p>
         </motion.div>
 
         {/* Slider */}
-        <Slider {...settings} className="px-1 sm:px-4">
+        <Slider {...settings} className="px-2 sm:px-4">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -132,18 +132,18 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="px-2 w-full"
+                className="px-2"
               >
                 <Card
-                  className="p-0 w-full mx-auto overflow-hidden rounded-3xl 
-                  border border-white/20 bg-white/70 backdrop-blur-xl 
-                  shadow-xl hover:shadow-2xl 
+                  className="p-0 w-full mx-auto overflow-hidden rounded-2xl 
+                  border border-white/20 bg-white/80 backdrop-blur-xl 
+                  shadow-md hover:shadow-xl 
                   hover:border-amber-400 hover:shadow-amber-200/50
-                  hover:-translate-y-3 
+                  hover:-translate-y-2 
                   transition-all duration-500 group"
                 >
                   {/* Image */}
-                  <div className="h-44 sm:h-52 md:h-60 w-full relative overflow-hidden">
+                  <div className="h-40 sm:h-48 md:h-56 lg:h-60 w-full relative overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -154,25 +154,25 @@ export default function Services() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-5 sm:p-6 md:p-7 space-y-4">
+                  <div className="p-4 sm:p-5 md:p-6 space-y-3">
                     {/* Icon */}
                     <div
-                      className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${service.color} 
+                      className={`w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 ${service.color} 
                         rounded-xl flex items-center justify-center 
                         shadow-lg group-hover:scale-110 transition-transform duration-300`}
                     >
-                      <Icon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 text-white" />
                     </div>
 
                     {/* Title & Description */}
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                       <h3
-                        className={`${playfair.className} text-lg md:text-xl font-bold text-gray-900 
+                        className={`${playfair.className} text-base sm:text-lg md:text-xl font-bold text-gray-900 
                           group-hover:text-amber-600 transition-colors`}
                       >
                         {service.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                      <p className="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed">
                         {service.description}
                       </p>
                     </div>
