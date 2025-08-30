@@ -18,7 +18,7 @@ export default function AboutPage() {
           priority
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/80 to-black/95" />
       </div>
 
       {/* Floating Geometric Pattern Overlay */}
