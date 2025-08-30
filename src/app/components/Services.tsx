@@ -132,7 +132,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="px-2"
+                className="px-2 w-full"
               >
                 <Card
                   className="p-0 w-full mx-auto overflow-hidden rounded-3xl 
