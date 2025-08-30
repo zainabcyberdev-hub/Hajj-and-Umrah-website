@@ -32,7 +32,7 @@ const services = [
     title: "eVisa Application",
     description:
       "Simplified visa application process for pilgrims from all over the world",
-    color: "bg-gradient-to-r from-emerald-500 to-green-600",
+    color: "bg-gradient-to-r from-amber-500 to-yellow-600",
     image: "/hajjVisa.jpg",
   },
   {
@@ -47,7 +47,7 @@ const services = [
     icon: Hotel,
     title: "Accommodation",
     description: "Book verified hotels in Makkah, Madina and other holy cities",
-    color: "bg-gradient-to-r from-amber-500 to-yellow-600",
+    color: "bg-gradient-to-r from-amber-400 to-amber-600",
     image: "/hotels.jpg",
   },
   {
@@ -81,7 +81,7 @@ export default function Services() {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
-    speed: 600,
+    speed: 700,
     slidesToShow: 3,
     slidesToScroll: 1,
     pauseOnHover: true,
@@ -94,38 +94,30 @@ export default function Services() {
   };
 
   return (
-    <section className="relative py-12 sm:py-16 md:py-24 overflow-hidden">
+    <section className="relative py-16 sm:py-20 lg:py-28 overflow-hidden">
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: "url('/servicesBack.png')" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 backdrop-blur-sm" />
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-teal-950 via-blue-950 to-teal-950 opacity-95" />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mx-auto mb-12 sm:mb-16 md:mb-20"
+          transition={{ duration: 0.9 }}
+          className="text-center mb-14 sm:mb-20"
         >
-          <motion.h2
-            initial={{ scale: 0.9 }}
-            whileInView={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 100 }}
-            className={`${merienda.className} text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold 
+          <h2
+            className={`${merienda.className} text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold 
               bg-gradient-to-r from-amber-400 to-yellow-300 bg-clip-text text-transparent 
               drop-shadow-[2px_4px_6px_rgba(0,0,0,0.6)]`}
           >
-            Our Services
-          </motion.h2>
-          <p className="text-amber-400 text-base sm:text-lg md:text-xl leading-relaxed mt-4 sm:mt-6 max-w-2xl mx-auto">
-            From visa applications to guided tours, we provide everything you
-            need for a seamless and spiritual pilgrimage experience.
+            Our Premium Services
+          </h2>
+          <p className="mt-6 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed">
+            Experience luxury, comfort, and spirituality through our
+            all-inclusive services crafted for your sacred journey.
           </p>
         </motion.div>
 
@@ -140,19 +132,19 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="px-3"
+                className="px-4"
               >
                 <Card
-                  className="p-0 w-full max-w-sm mx-auto overflow-hidden rounded-2xl 
+                  className="p-0 w-full max-w-sm mx-auto overflow-hidden rounded-3xl 
                   border border-white/20 bg-white/70 backdrop-blur-xl 
-                  shadow-lg hover:shadow-2xl 
-                  hover:border-amber-400 
-                  hover:-translate-y-2 
+                  shadow-xl hover:shadow-2xl 
+                  hover:border-amber-400 hover:shadow-amber-200/50
+                  hover:-translate-y-3 
                   transition-all duration-500 group
                   min-w-[280px]"
                 >
                   {/* Image */}
-                  <div className="h-44 sm:h-52 md:h-56 w-full relative overflow-hidden">
+                  <div className="h-48 sm:h-56 md:h-60 w-full relative overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -163,12 +155,12 @@ export default function Services() {
                   </div>
 
                   {/* Content */}
-                  <div className="p-5 md:p-6 space-y-4">
+                  <div className="p-6 md:p-7 space-y-4">
                     {/* Icon */}
                     <div
                       className={`w-14 h-14 md:w-16 md:h-16 ${service.color} 
                         rounded-xl flex items-center justify-center 
-                        shadow-md group-hover:scale-110 transition-transform duration-300`}
+                        shadow-lg group-hover:scale-110 transition-transform duration-300`}
                     >
                       <Icon className="h-7 w-7 md:h-8 md:w-8 text-white" />
                     </div>

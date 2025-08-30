@@ -47,23 +47,23 @@ const Hero = () => {
 
   const images = [
     { src: "/background1.jpg", alt: "Hajj Image 1" },
-    { src: "/background.svg", alt: "Hajj Image 2" },
-    { src: "/background2.jpg", alt: "Hajj Image 3" },
-    { src: "/background3.jpg", alt: "Hajj Image 4" },
+    { src: "/background2.jpg", alt: "Hajj Image 2" },
+    { src: "/background3.jpg", alt: "Hajj Image 3" },
   ];
 
   return (
     <section
-      className={`${merienda.className} relative min-h-[75vh] lg:min-h-[80vh] 
-      bg-gradient-to-br from-sky-900 via-slate-900 to-slate-800 
-      overflow-hidden flex items-center`}
+      className={`${merienda.className} relative min-h-[75vh] lg:min-h-[80vh] overflow-hidden flex items-center`}
     >
-      {/* Background Accent */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <div className="absolute top-20 left-10 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-amber-400/40 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 bg-white/10 rounded-full blur-3xl"></div>
+      {/* Background Image with Overlay */}
+      <div
+        className="absolute inset-0 bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: "url('/background1.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
+      {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center">
           {/* Left Content */}
@@ -71,24 +71,25 @@ const Hero = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="space-y-8 text-center lg:text-left"
+            className="space-y-8 text-center lg:text-left text-white"
           >
-            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-white text-xs sm:text-sm">
+            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-xs sm:text-sm">
               <Star className="h-4 w-4 text-amber-400" />
               <span>Official Hajj & Umrah Platform</span>
             </div>
 
             <div className="space-y-6">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
                 Begin Your Sacred{" "}
                 <span className="block bg-gradient-to-r from-amber-400 to-yellow-200 bg-clip-text text-transparent">
                   Journey of a Lifetime
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Plan, book, and embark on your spiritual journey to Makkah and
-                Madinah with trusted guidance and seamless services.
+                Madinah with trusted guidance, modern tools, and seamless
+                services designed to support every pilgrim.
               </p>
             </div>
 
